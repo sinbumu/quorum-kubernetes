@@ -1,0 +1,13 @@
+# values.yaml
+postgresql:
+  persistence:
+    enabled: true
+    storageClass: "blockscout-storage"
+    accessModes:
+      - ReadWriteOnce
+    size: 10Gi
+
+blockscout:
+  secretKeyBase: XyZ123abc+45DEFGHIJKLMNOPQRSTUVWXYZabcdefghijklm==
+  databaseURL: postgres://postgres:123456789a@blockscout-postgresql.besu.svc.cluster.local:5432/blockscout
+  ethereumNodeURL: http://besu-node-bootnode-2.besu.svc.cluster.local:8545
