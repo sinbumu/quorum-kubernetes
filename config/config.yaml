@@ -1,0 +1,40 @@
+namespace: quorum
+besu:
+  image:
+    repository: hyperledger/besu
+    tag: "21.1.6"
+  config:
+    network:
+      id: 1337
+      genesis: |
+        {
+          "config": {
+            "chainId": 1337,
+            "muirglacierblock": 0,
+            "byzantiumBlock": 0
+          },
+          "nonce": "0x0",
+          "timestamp": "0x5e5bf76d",
+          "extraData": "0x00",
+          "gasLimit": "0x1c9c380",
+          "difficulty": "0x1",
+          "mixHash": "0x0000000000000000000000000000000000000000000000000000000000000000",
+          "coinbase": "0x0000000000000000000000000000000000000000",
+          "alloc": {}
+        }
+    discovery:
+      enabled: false
+    p2p:
+      port: 30303
+      host: besu-node
+    rpc:
+      http:
+        enabled: true
+        host: besu-node
+        port: 8545
+        cors: "*"
+        api: ["ETH", "NET", "WEB3", "ADMIN"]
+      ws:
+        enabled: false
+  privacy:
+    enabled: false

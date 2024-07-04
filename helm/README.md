@@ -192,24 +192,24 @@ http://<INGRESS_IP>/explorer
 ### _For Besu:_
 
 ```bash
-helm install genesis ./charts/besu-genesis --namespace quorum --create-namespace --values ./values/genesis-besu.yml
+helm install genesis ./charts/besu-genesis --namespace besu --create-namespace --values ./values/genesis-besu.yml
 
 # bootnodes - optional but recommended
-helm install bootnode-1 ./charts/besu-node --namespace quorum --values ./values/bootnode.yml
-helm install bootnode-2 ./charts/besu-node --namespace quorum --values ./values/bootnode.yml
+helm install bootnode-1 ./charts/besu-node --namespace besu --values ./values/bootnode.yml
+helm install bootnode-2 ./charts/besu-node --namespace besu --values ./values/bootnode.yml
 
 # !! IMPORTANT !! - If you use bootnodes, please set `quorumFlags.usesBootnodes: true` in the override yaml files
 # for validator.yml, txnode.yml, reader.yml
-helm install validator-1 ./charts/besu-node --namespace quorum --values ./values/validator.yml
-helm install validator-2 ./charts/besu-node --namespace quorum --values ./values/validator.yml
-helm install validator-3 ./charts/besu-node --namespace quorum --values ./values/validator.yml
-helm install validator-4 ./charts/besu-node --namespace quorum --values ./values/validator.yml
+helm install validator-1 ./charts/besu-node --namespace besu --values ./values/validator.yml
+helm install validator-2 ./charts/besu-node --namespace besu --values ./values/validator.yml
+helm install validator-3 ./charts/besu-node --namespace besu --values ./values/validator.yml
+helm install validator-4 ./charts/besu-node --namespace besu --values ./values/validator.yml
 
 # spin up a besu and tessera node pair
-helm install member-1 ./charts/besu-node --namespace quorum --values ./values/txnode.yml
+helm install member-1 ./charts/besu-node --namespace besu --values ./values/txnode.yml
 
 # spin up a quorum rpc node
-helm install rpc-1 ./charts/besu-node --namespace quorum --values ./values/reader.yml
+helm install rpc-1 ./charts/besu-node --namespace besu --values ./values/reader.yml
 ```
 
 Optionally deploy the ingress controller for the network and nodes like so:
@@ -220,7 +220,7 @@ NOTE: Deploying the ingress rules, assumes you are connecting to the `tx-1` node
 helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
 helm repo update
 helm install quorum-network-ingress ingress-nginx/ingress-nginx \
-    --namespace quorum \
+    --namespace besu \
     --set controller.ingressClassResource.name="network-nginx" \
     --set controller.ingressClassResource.controllerValue="k8s.io/network-ingress-nginx" \
     --set controller.replicaCount=1 \
