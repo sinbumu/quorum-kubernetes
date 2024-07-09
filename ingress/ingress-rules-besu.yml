@@ -1,4 +1,3 @@
----
 # ingress-nginx IngressClass
 apiVersion: networking.k8s.io/v1
 kind: IngressClass
@@ -30,6 +29,13 @@ spec:
   rules:
   - http:
       paths:
+      - path: /kibana
+        pathType: Prefix
+        backend:
+          service:
+            name: kibana-kibana
+            port:
+              number: 5601
       - path: /rpc
         pathType: Prefix
         backend:
@@ -63,6 +69,13 @@ spec:
         backend:
           service:
             name: besu-node-validator-4
+            port:
+              number: 8545
+      - path: /validator-5
+        pathType: Prefix
+        backend:
+          service:
+            name: besu-node-validator-5
             port:
               number: 8545
       - path: /member-1
@@ -107,27 +120,6 @@ spec:
             name: besu-node-member-3
             port:
               number: 9080
-      - path: /kibana
-        pathType: Prefix
-        backend:
-          service:
-            name: kibana-kibana
-            port:
-              number: 5601
-      - path: /blockscout
-        pathType: Prefix
-        backend:
-          service:
-            name: blockscout
-            port:
-              number: 4000
-      - path: /quorum-explorer
-        pathType: Prefix
-        backend:
-          service:
-            name: quorum-explorer
-            port:
-              number: 80
       - path: /
         pathType: Prefix
         backend:
